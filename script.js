@@ -86,10 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Hero Background Slideshow ---
     const heroBg = document.querySelector('.hero-bg');
     const bgImages = [
-        'public/portada.jpg',
-        'public/E88A9658.jpg',
-        'public/E88A9720.jpg',
-        'public/E88A9744.jpg'
+        'assets/portada.jpg',
+        'assets/E88A9658.jpg',
+        'assets/E88A9720.jpg',
+        'assets/E88A9744.jpg'
     ];
     let bgIndex = 0;
     
