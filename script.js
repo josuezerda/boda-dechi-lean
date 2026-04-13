@@ -86,45 +86,143 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Hero Background Slideshow ---
     const heroSection = document.querySelector('.hero');
     const existingHeroBg = document.querySelector('.hero-bg');
+    if (existingHeroBg) existingHeroBg.remove();
     
-    const bgImages = [
+    // Lista ampliada de fotos (excluyendo E88A9720.jpg y E88A9744.jpg - tronco/solo)
+    const sliderImages = [
         'assets/portada.jpg',
+        'assets/E88A9512.jpg',
+        'assets/E88A9540.jpg',
+        'assets/E88A9584.jpg',
+        'assets/E88A9600.jpg',
+        'assets/E88A9616.jpg',
+        'assets/E88A9658.jpg',
+        'assets/E88A9690.jpg',
+        'assets/E88A9764.jpg'
+    ];
+
+    // Create 2 interlocking layers for optimized smooth crossfade
+    const bgLayer1 = document.createElement('div');
+    const bgLayer2 = document.createElement('div');
+    bgLayer1.className = 'hero-bg';
+    bgLayer2.className = 'hero-bg';
+    
+    bgLayer1.style.transition = 'opacity 2.5s ease-in-out';
+    bgLayer2.style.transition = 'opacity 2.5s ease-in-out';
+    
+    bgLayer1.style.backgroundImage = `url('${sliderImages[0]}')`;
+    bgLayer2.style.backgroundImage = `url('${sliderImages[1]}')`;
+    
+    bgLayer1.style.opacity = '1';
+    bgLayer2.style.opacity = '0';
+    
+    const heroOverlay = document.querySelector('.hero-overlay');
+    heroSection.insertBefore(bgLayer1, heroOverlay);
+    heroSection.insertBefore(bgLayer2, heroOverlay);
+
+    let currentLayer = 1;
+    let imageIndex = 0;
+
+    // Change image every 5 seconds
+    setInterval(() => {
+        // We move to the next image
+        imageIndex = (imageIndex + 1) % sliderImages.length;
+        const nextImageIndex = (imageIndex + 1) % sliderImages.length;
+        
+        if (currentLayer === 1) {
+            bgLayer2.style.opacity = '1';
+            bgLayer1.style.opacity = '0';
+            currentLayer = 2;
+            
+            // Wait for fade out, then preload the next image behind
+            setTimeout(() => {
+                bgLayer1.style.backgroundImage = `url('${sliderImages[nextImageIndex]}')`;
+            }, 2500);
+        } else {
+            bgLayer1.style.opacity = '1';
+            bgLayer2.style.opacity = '0';
+            currentLayer = 1;
+            
+            setTimeout(() => {
+                bgLayer2.style.backgroundImage = `url('${sliderImages[nextImageIndex]}')`;
+            }, 2500);
+        }
+    }, 5000);
+
+
+    // --- Gallery Grid Dynamic Slideshow ---
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryPool = [
+        'assets/E88A9522.jpg',
+        'assets/E88A9550.jpg',
+        'assets/E88A9565.jpg',
+        'assets/E88A9586.jpg',
+        'assets/E88A9614.jpg',
+        'assets/E88A9654.jpg',
+        'assets/portada.jpg',
+        'assets/E88A9616.jpg',
         'assets/E88A9658.jpg'
     ];
 
-    // Create background elements for clean crossfading
-    const bgElements = [];
-    const heroOverlay = document.querySelector('.hero-overlay');
-    
-    bgImages.forEach((src, index) => {
-        const bgDiv = document.createElement('div');
-        bgDiv.className = 'hero-bg';
-        bgDiv.style.backgroundImage = `url('${src}')`;
-        bgDiv.style.opacity = index === 0 ? '1' : '0';
-        bgDiv.style.transition = 'opacity 2.5s ease-in-out';
+    galleryItems.forEach((item, itemIndex) => {
+        // Clear existing static background correctly and setup relative positioning
+        item.style.backgroundImage = 'none';
+        item.style.position = 'relative';
+        item.style.overflow = 'hidden';
+
+        const gLayer1 = document.createElement('div');
+        const gLayer2 = document.createElement('div');
         
-        heroSection.insertBefore(bgDiv, heroOverlay);
-        bgElements.push(bgDiv);
+        const layerStyle = `
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            transition: opacity 2s ease-in-out;
+            z-index: 1;
+            border-radius: 15px; /* keep rounded corners */
+        `;
+        gLayer1.style.cssText = layerStyle;
+        gLayer2.style.cssText = layerStyle;
+        
+        item.appendChild(gLayer1);
+        item.appendChild(gLayer2);
+
+        // Displace the start index so they show different pictures
+        let gIndex = (itemIndex * 2) % galleryPool.length;
+        let nextGIndex = (gIndex + 1) % galleryPool.length;
+        
+        gLayer1.style.backgroundImage = `url('${galleryPool[gIndex]}')`;
+        gLayer2.style.backgroundImage = `url('${galleryPool[nextGIndex]}')`;
+        
+        gLayer1.style.opacity = '1';
+        gLayer2.style.opacity = '0';
+        
+        // Stagger their intervals to give a domino/random effect
+        setTimeout(() => {
+            let currentGLayer = 1;
+            
+            setInterval(() => {
+                gIndex = (gIndex + 1) % galleryPool.length;
+                nextGIndex = (gIndex + 1) % galleryPool.length;
+                
+                if (currentGLayer === 1) {
+                    gLayer2.style.opacity = '1';
+                    gLayer1.style.opacity = '0';
+                    currentGLayer = 2;
+                    setTimeout(() => {
+                        gLayer1.style.backgroundImage = `url('${galleryPool[nextGIndex]}')`;
+                    }, 2000);
+                } else {
+                    gLayer1.style.opacity = '1';
+                    gLayer2.style.opacity = '0';
+                    currentGLayer = 1;
+                    setTimeout(() => {
+                        gLayer2.style.backgroundImage = `url('${galleryPool[nextGIndex]}')`;
+                    }, 2000);
+                }
+            }, 5500 + (itemIndex * 1500)); // slightly different timing for each card
+        }, itemIndex * 1200);
     });
-
-    // Remove the original static background to avoid duplicates
-    if (existingHeroBg) {
-        existingHeroBg.remove();
-    }
-
-    let bgIndex = 0;
-    
-    // Change image every 5 seconds with a smooth opacity crossfade
-    setInterval(() => {
-        // Fade out current
-        bgElements[bgIndex].style.opacity = '0';
-        
-        // Advance index
-        bgIndex = (bgIndex + 1) % bgImages.length;
-        
-        // Fade in next
-        bgElements[bgIndex].style.opacity = '1';
-    }, 5000);
 
     // --- Particles.js Configuration ---
     if(typeof particlesJS !== 'undefined') {
