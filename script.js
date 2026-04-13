@@ -88,11 +88,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const existingHeroBg = document.querySelector('.hero-bg');
     if (existingHeroBg) existingHeroBg.remove();
     
-    // Lista ampliada de fotos (excluyendo E88A9720.jpg y E88A9744.jpg - tronco/solo)
+    // Lista de fotos con el orden específico:
+    // 1) Beso (estimado E88A9522.jpg o similar)
+    // 2) Novia con ramo (portada.jpg)
+    // 3+) El resto
     const sliderImages = [
+        'assets/E88A9522.jpg',
         'assets/portada.jpg',
-        'assets/E88A9512.jpg',
-        'assets/E88A9540.jpg',
         'assets/E88A9584.jpg',
         'assets/E88A9600.jpg',
         'assets/E88A9616.jpg',
@@ -150,18 +152,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 5000);
 
 
-    // --- Gallery Grid Dynamic Slideshow ---
+    // --- Gallery Grid Dynamic Slideshow (Fixed Repetition) ---
     const galleryItems = document.querySelectorAll('.gallery-item');
-    const galleryPool = [
-        'assets/E88A9522.jpg',
-        'assets/E88A9550.jpg',
-        'assets/E88A9565.jpg',
-        'assets/E88A9586.jpg',
-        'assets/E88A9614.jpg',
-        'assets/E88A9654.jpg',
-        'assets/portada.jpg',
-        'assets/E88A9616.jpg',
-        'assets/E88A9658.jpg'
+    
+    // Divide images into 4 exclusive separate blocks to avoid any repetition
+    const galleryBlocks = [
+        ['assets/E88A9512.jpg', 'assets/E88A9614.jpg', 'assets/E88A9690.jpg'],
+        ['assets/E88A9540.jpg', 'assets/E88A9616.jpg', 'assets/E88A9764.jpg'],
+        ['assets/E88A9550.jpg', 'assets/E88A9654.jpg', 'assets/E88A9586.jpg'],
+        ['assets/E88A9565.jpg', 'assets/E88A9658.jpg', 'assets/E88A9600.jpg']
     ];
 
     galleryItems.forEach((item, itemIndex) => {
@@ -187,12 +186,13 @@ document.addEventListener('DOMContentLoaded', () => {
         item.appendChild(gLayer1);
         item.appendChild(gLayer2);
 
-        // Displace the start index so they show different pictures
-        let gIndex = (itemIndex * 2) % galleryPool.length;
-        let nextGIndex = (gIndex + 1) % galleryPool.length;
+        // Assign the unique block of photos for this item
+        const myPhotos = galleryBlocks[itemIndex % galleryBlocks.length];
+        let gIndex = 0;
+        let nextGIndex = 1;
         
-        gLayer1.style.backgroundImage = `url('${galleryPool[gIndex]}')`;
-        gLayer2.style.backgroundImage = `url('${galleryPool[nextGIndex]}')`;
+        gLayer1.style.backgroundImage = `url('${myPhotos[gIndex]}')`;
+        gLayer2.style.backgroundImage = `url('${myPhotos[nextGIndex]}')`;
         
         gLayer1.style.opacity = '1';
         gLayer2.style.opacity = '0';
@@ -202,26 +202,26 @@ document.addEventListener('DOMContentLoaded', () => {
             let currentGLayer = 1;
             
             setInterval(() => {
-                gIndex = (gIndex + 1) % galleryPool.length;
-                nextGIndex = (gIndex + 1) % galleryPool.length;
+                gIndex = (gIndex + 1) % myPhotos.length;
+                nextGIndex = (gIndex + 1) % myPhotos.length;
                 
                 if (currentGLayer === 1) {
                     gLayer2.style.opacity = '1';
                     gLayer1.style.opacity = '0';
                     currentGLayer = 2;
                     setTimeout(() => {
-                        gLayer1.style.backgroundImage = `url('${galleryPool[nextGIndex]}')`;
+                        gLayer1.style.backgroundImage = `url('${myPhotos[nextGIndex]}')`;
                     }, 2000);
                 } else {
                     gLayer1.style.opacity = '1';
                     gLayer2.style.opacity = '0';
                     currentGLayer = 1;
                     setTimeout(() => {
-                        gLayer2.style.backgroundImage = `url('${galleryPool[nextGIndex]}')`;
+                        gLayer2.style.backgroundImage = `url('${myPhotos[nextGIndex]}')`;
                     }, 2000);
                 }
-            }, 5500 + (itemIndex * 1500)); // slightly different timing for each card
-        }, itemIndex * 1200);
+            }, 6000 + (itemIndex * 1500)); // slightly different timing for each card
+        }, itemIndex * 1500);
     });
 
     // --- Particles.js Configuration ---
