@@ -84,26 +84,46 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCountdown();
 
     // --- Hero Background Slideshow ---
-    const heroBg = document.querySelector('.hero-bg');
+    const heroSection = document.querySelector('.hero');
+    const existingHeroBg = document.querySelector('.hero-bg');
+    
     const bgImages = [
         'assets/portada.jpg',
         'assets/E88A9658.jpg'
     ];
 
-    // Preload images to prevent black screens during transitions
-    const preloadedImages = [];
-    bgImages.forEach(src => {
-        const img = new Image();
-        img.src = src;
-        preloadedImages.push(img);
+    // Create background elements for clean crossfading
+    const bgElements = [];
+    const heroOverlay = document.querySelector('.hero-overlay');
+    
+    bgImages.forEach((src, index) => {
+        const bgDiv = document.createElement('div');
+        bgDiv.className = 'hero-bg';
+        bgDiv.style.backgroundImage = `url('${src}')`;
+        bgDiv.style.opacity = index === 0 ? '1' : '0';
+        bgDiv.style.transition = 'opacity 2.5s ease-in-out';
+        
+        heroSection.insertBefore(bgDiv, heroOverlay);
+        bgElements.push(bgDiv);
     });
+
+    // Remove the original static background to avoid duplicates
+    if (existingHeroBg) {
+        existingHeroBg.remove();
+    }
 
     let bgIndex = 0;
     
-    // Change image every 5 seconds
+    // Change image every 5 seconds with a smooth opacity crossfade
     setInterval(() => {
+        // Fade out current
+        bgElements[bgIndex].style.opacity = '0';
+        
+        // Advance index
         bgIndex = (bgIndex + 1) % bgImages.length;
-        heroBg.style.backgroundImage = `url('${bgImages[bgIndex]}')`;
+        
+        // Fade in next
+        bgElements[bgIndex].style.opacity = '1';
     }, 5000);
 
     // --- Particles.js Configuration ---

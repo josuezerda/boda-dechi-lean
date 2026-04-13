@@ -161,7 +161,7 @@ a {
 
 .enter-btn-wrapper {
     position: absolute;
-    bottom: 120px;
+    bottom: 25vh;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
@@ -248,7 +248,7 @@ a {
     background-size: cover;
     background-position: center;
     background-attachment: scroll; /* better for slider performance */
-    transition: background-image 2s ease-in-out;
+    transition: opacity 2.5s ease-in-out; /* Uses opacity for smooth crossfade */
     z-index: 0;
 }
 
