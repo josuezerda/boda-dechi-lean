@@ -1,11 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // Initialize AOS (Animate on Scroll)
-    AOS.init({
-        duration: 1000,
-        once: true,
-        offset: 100
-    });
+    // Note: AOS is now initialized when the user clicks 'Ingresar' 
+    // to ensure correct offset and scroll listener bindings.
 
     // --- Audio & Entrance Logic ---
     const entranceScreen = document.getElementById('entrance-screen');
@@ -38,8 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
             mainContent.style.pointerEvents = 'auto';
             mainContent.style.opacity = '1';
             
-            // Re-trigger AOS on load
-            AOS.refresh();
+            // Initialize AOS only now that the page is fully unhidden and scrollable
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
         }, 1000);
     });
 
