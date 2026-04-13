@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
         entranceScreen.style.opacity = '0';
         setTimeout(() => {
             entranceScreen.classList.add('hidden');
-            mainContent.classList.remove('hidden');
+            document.body.classList.remove('no-scroll');
+            mainContent.style.pointerEvents = 'auto';
             mainContent.style.opacity = '1';
             
             // Re-trigger AOS on load
