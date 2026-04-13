@@ -91,12 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (existingHeroBg) existingHeroBg.remove();
     
     // Lista de fotos con el orden específico:
-    // 1) Beso (estimado E88A9522.jpg o similar)
-    // 2) Novia con ramo (portada.jpg)
+    // 1) Beso (portada.jpg)
+    // 2) Novia con ramo (E88A9522.jpg u otra)
     // 3+) El resto
     const sliderImages = [
-        'assets/E88A9522.jpg',
         'assets/portada.jpg',
+        'assets/E88A9522.jpg',
         'assets/E88A9584.jpg',
         'assets/E88A9600.jpg',
         'assets/E88A9616.jpg',
