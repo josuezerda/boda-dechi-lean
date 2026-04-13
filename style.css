@@ -485,8 +485,9 @@ section {
 
 .card-details p {
     margin-bottom: 15px;
-    font-size: 1.1rem;
+    font-size: 0.95rem; /* Achicado a pedido para que no parezca título */
     line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85); /* Más suave para bajarle la jerarquía visual */
 }
 
 .card-details strong {
@@ -499,10 +500,11 @@ section {
 }
 
 .dress-main {
-    font-size: 1.4rem;
-    font-weight: 500;
+    font-size: 1.1rem; /* Achicado para que no parezca título */
+    font-weight: 400; /* Le quitamos rudeza */
     margin-bottom: 25px;
     letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .dress-note {
