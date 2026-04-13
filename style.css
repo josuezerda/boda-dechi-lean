@@ -161,7 +161,7 @@ a {
 
 .enter-btn-wrapper {
     position: absolute;
-    bottom: 25vh;
+    bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
@@ -623,6 +623,10 @@ section {
     .ampersand { font-size: 3.5rem; }
     .romantic-text { font-size: 0.95rem; line-height: 1.8; letter-spacing: 2px; padding: 0 15px; }
     
+    .enter-btn-wrapper {
+        bottom: 25vh;
+    }
+
     .details-section .container {
         grid-template-columns: 1fr;
     }
