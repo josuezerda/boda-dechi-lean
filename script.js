@@ -36,6 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
             entranceScreen.classList.add('hidden');
             mainContent.classList.remove('hidden');
             
+            // The website starts with opacity 0 so we fade it in
+            mainContent.style.opacity = '1';
+            
             // Re-trigger AOS on load
             AOS.refresh();
         }, 1000);
