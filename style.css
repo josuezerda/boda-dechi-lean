@@ -201,12 +201,36 @@ a {
     transition: opacity 1.5s ease-in;
 }
 
-/* === Music Control === */
+/* === Floating Actions === */
 .music-control {
     position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 1000;
+}
+
+.floating-wpp {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #25D366;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.floating-wpp:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    color: white;
 }
 
 .music-btn {
