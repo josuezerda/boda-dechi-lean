@@ -87,10 +87,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroBg = document.querySelector('.hero-bg');
     const bgImages = [
         'assets/portada.jpg',
-        'assets/E88A9658.jpg',
-        'assets/E88A9720.jpg',
-        'assets/E88A9744.jpg'
+        'assets/E88A9658.jpg'
     ];
+
+    // Preload images to prevent black screens during transitions
+    const preloadedImages = [];
+    bgImages.forEach(src => {
+        const img = new Image();
+        img.src = src;
+        preloadedImages.push(img);
+    });
+
     let bgIndex = 0;
     
     // Change image every 5 seconds
