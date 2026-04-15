@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 },
                 "color": {
-                    "value": "#d4af37" // Golden color
+                    "value": ["#ffffff", "#dcedc8", "#a5d6a7"] // Soft white and leaf greens
                 },
                 "shape": {
                     "type": "circle",
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 },
                 "opacity": {
-                    "value": 0.25,
+                    "value": 0.6,
                     "random": true,
                     "anim": {
                         "enable": true,
