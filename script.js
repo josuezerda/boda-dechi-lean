@@ -97,8 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const sliderImages = [
         'assets/portada.jpg',
         'assets/E88A9522.jpg',
-        'assets/E88A9584.jpg',
-        'assets/E88A9600.jpg',
         'assets/E88A9616.jpg',
         'assets/E88A9658.jpg',
         'assets/E88A9690.jpg',
