@@ -317,9 +317,10 @@ a {
     font-size: 1.1rem;
     font-weight: 300;
     letter-spacing: 5px;
-    color: var(--gold-light);
+    color: var(--gold-base);
     margin-bottom: 20px;
     text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.35);
 }
 
 .main-names {
@@ -550,7 +551,8 @@ section {
 }
 
 .dress-note strong {
-    color: #ff8a65; /* A color to emphasize the warning about chocolate color */
+    color: #5C3317; /* Color chocolate real */
+    font-weight: 700;
 }
 
 /* === Gifts Section === */
@@ -658,13 +660,13 @@ section {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: var(--gold-light);
+    color: #3a4a3c;
     font-weight: 500;
     transition: color 0.3s;
 }
 
 .fusion-link:hover {
-    color: #fff;
+    color: #000;
 }
 
 /* === Responsive === */
