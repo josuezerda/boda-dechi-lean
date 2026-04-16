@@ -95,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2) Novia con ramo (E88A9522.jpg u otra)
     // 3+) El resto
     const sliderImages = [
-        'assets/E88A9616.jpg',
         'assets/E88A9658.jpg',
         'assets/E88A9690.jpg',
         'assets/E88A9764.jpg'
