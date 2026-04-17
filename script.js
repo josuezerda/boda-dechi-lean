@@ -148,7 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 5000);
 
 
-    // --- Gallery Grid Dynamic Slideshow (Fixed Repetition) ---
+    // --- Gallery Grid Dynamic Slideshow (Disabled to show the 4 static user-selected photos) ---
+    /*
     const galleryItems = document.querySelectorAll('.gallery-item');
     
     // Divide images into 4 exclusive separate blocks to avoid any repetition
@@ -219,6 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 6000 + (itemIndex * 1500)); // slightly different timing for each card
         }, itemIndex * 1500);
     });
+    */
 
     // --- Particles.js Configuration ---
     if(typeof particlesJS !== 'undefined') {
