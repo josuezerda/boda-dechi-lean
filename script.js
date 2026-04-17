@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
             background-size: cover; background-position: center;
             transition: opacity 2s ease-in-out;
             z-index: 1;
-            border-radius: 15px; /* keep rounded corners */
+            border-radius: 15px; // keep rounded corners
         `;
         gLayer1.style.cssText = layerStyle;
         gLayer2.style.cssText = layerStyle;
