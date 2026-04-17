@@ -512,8 +512,8 @@ section {
 }
 
 .card-details strong {
-    color: var(--gold-light);
-    font-weight: 500;
+    color: #2d4019;
+    font-weight: 600;
 }
 
 .ceremony-card .gold-btn {
