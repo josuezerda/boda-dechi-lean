@@ -95,8 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2) Novia con ramo (E88A9522.jpg u otra)
     // 3+) El resto
     const sliderImages = [
-        'assets/E88A9690.jpg',
-        'assets/E88A9764.jpg'
+        'assets/primerafoto.jpg',
+        'assets/segundafoto.jpeg',
+        'assets/tercerafoto.jpg',
+        'assets/cuartafoto.jpg'
     ];
 
     // Create 2 interlocking layers for optimized smooth crossfade
