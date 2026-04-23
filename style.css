@@ -698,15 +698,7 @@ section {
     flex-shrink: 0;
 }
 
-.food-btn {
-    background: #25D366 !important;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3) !important;
-}
 
-.food-btn:hover {
-    background: #1da851 !important;
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5) !important;
-}
 
 /* === Responsive === */
 @media (max-width: 768px) {
