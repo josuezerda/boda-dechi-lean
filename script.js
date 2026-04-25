@@ -85,10 +85,59 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // --- Hero Background Slideshow (desactivado - sin foto de fondo) ---
-    // Se eliminaron las imágenes de fondo del hero a pedido del usuario.
+    // --- Hero Background Slideshow ---
+    const heroSection = document.querySelector('.hero');
     const existingHeroBg = document.querySelector('.hero-bg');
     if (existingHeroBg) existingHeroBg.remove();
+
+    const sliderImages = [
+        'assets/segundafoto.jpeg',
+        'assets/tercerafoto.jpg',
+        'assets/cuartafoto.jpg'
+    ];
+
+    // Create 2 interlocking layers for optimized smooth crossfade
+    const bgLayer1 = document.createElement('div');
+    const bgLayer2 = document.createElement('div');
+    bgLayer1.className = 'hero-bg';
+    bgLayer2.className = 'hero-bg';
+
+    bgLayer1.style.transition = 'opacity 2.5s ease-in-out';
+    bgLayer2.style.transition = 'opacity 2.5s ease-in-out';
+
+    bgLayer1.style.backgroundImage = `url('${sliderImages[0]}')`;
+    bgLayer2.style.backgroundImage = `url('${sliderImages[1]}')`;
+
+    bgLayer1.style.opacity = '1';
+    bgLayer2.style.opacity = '0';
+
+    const heroOverlay = document.querySelector('.hero-overlay');
+    heroSection.insertBefore(bgLayer1, heroOverlay);
+    heroSection.insertBefore(bgLayer2, heroOverlay);
+
+    let currentLayer = 1;
+    let imageIndex = 0;
+
+    setInterval(() => {
+        imageIndex = (imageIndex + 1) % sliderImages.length;
+        const nextImageIndex = (imageIndex + 1) % sliderImages.length;
+
+        if (currentLayer === 1) {
+            bgLayer2.style.opacity = '1';
+            bgLayer1.style.opacity = '0';
+            currentLayer = 2;
+            setTimeout(() => {
+                bgLayer1.style.backgroundImage = `url('${sliderImages[nextImageIndex]}')`;
+            }, 2500);
+        } else {
+            bgLayer1.style.opacity = '1';
+            bgLayer2.style.opacity = '0';
+            currentLayer = 1;
+            setTimeout(() => {
+                bgLayer2.style.backgroundImage = `url('${sliderImages[nextImageIndex]}')`;
+            }, 2500);
+        }
+    }, 5000);
 
 
     // --- Gallery Grid Dynamic Slideshow (Disabled to show the 4 static user-selected photos) ---
