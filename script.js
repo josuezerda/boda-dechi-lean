@@ -91,9 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (existingHeroBg) existingHeroBg.remove();
 
     const sliderImages = [
+        'assets/primerafoto.jpg',
         'assets/segundafoto.jpeg',
-        'assets/tercerafoto.jpg',
-        'assets/cuartafoto.jpg'
+        'assets/tercerafoto.jpg'
     ];
 
     // Create 2 interlocking layers for optimized smooth crossfade
